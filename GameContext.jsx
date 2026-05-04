@@ -94,7 +94,7 @@ export const GameProvider = ({ children }) => {
       });
     }
     
-    if (currentQuestionIndex < currentQuestions.length - 1 && lives > 1) {
+    if (currentQuestionIndex < currentQuestions.length - 1 && lives > 0) {
       setCurrentQuestionIndex(prev => prev + 1);
     } else {
       setGameOver(true);
