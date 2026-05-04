@@ -21,6 +21,7 @@ const QuizScreen = () => {
   const { saveScore } = useFirebase();
   const [timeLeft, setTimeLeft] = useState(30);
   const [answered, setAnswered] = useState(false);
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
 
   const currentQuestion = currentQuestions[currentQuestionIndex];
 
@@ -28,6 +29,7 @@ const QuizScreen = () => {
     if (currentQuestion) {
       setTimeLeft(currentQuestion.timeLimit);
       setAnswered(false);
+      setSelectedAnswerIndex(null);
     }
   }, [currentQuestionIndex, currentQuestion]);
 
@@ -75,6 +77,7 @@ const QuizScreen = () => {
     if (!answered) {
       answerQuestion(selectedAnswer);
       setAnswered(true);
+      setSelectedAnswerIndex(selectedAnswer);
     }
   };
 
@@ -197,7 +200,7 @@ const QuizScreen = () => {
                   background: '#D1FAE5',
                   color: '#065F46'
                 };
-              } else if (index === currentQuestion.selectedAnswer && index !== currentQuestion.correctAnswer) {
+              } else if (index === selectedAnswerIndex && index !== currentQuestion.correctAnswer) {
                 btnStyle = {
                   ...btnStyle,
                   borderColor: '#EF4444',
